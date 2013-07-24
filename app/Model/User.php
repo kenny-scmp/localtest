@@ -22,7 +22,7 @@ class User extends AppModel {
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A password is required',
-                'on'=>'save'
+                'on'=>'create'
             )
         ),
         'role' => array(
@@ -41,9 +41,9 @@ class User extends AppModel {
     	return true;
     }
 
-    public function beforeValidate(){
-        if (isset($this->data['User']['password']) && $this->data['User']['password'] == Security::hash(Configure::read('Security.salt'))) {
-            unset($this->data['User']['password']);
+    public function beforeValidate($options = array()){
+        if (isset($this->data['User']['password']) && empty($this->data[$this->alias]['password'])) {
+            unset($this->data[$this->alias]['password']);
         }
         return true;
     }

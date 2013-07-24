@@ -15,9 +15,6 @@
             'options' => array('admin' => 'Admin', 'author' => 'Author')
         ));
         ?>
-        <?php
-        debug($this->request->data['User']['password']);
-        ?>
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
